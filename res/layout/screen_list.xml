@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<LinearLayout android:orientation="vertical"
+    android:background="@color/plainBlack"
+    android:layout_height="fill_parent" 
+	android:layout_width="fill_parent"
+	xmlns:android="http://schemas.android.com/apk/res/android"> 
+	
+	<!-- header -->
+	<LinearLayout android:orientation="horizontal"
+	    android:background="@drawable/toptitlebar3"
+	    android:layout_height="@dimen/config_row_size" 
+		android:layout_width="fill_parent"
+		android:id="@+id/header"> 
+	
+		<ImageView android:layout_height="wrap_content"
+		    android:layout_width="wrap_content"
+		    android:id="@+id/image_header" 
+			android:layout_marginLeft="@dimen/config_picto_ListScreen_notif_left_margin"
+			android:src="@drawable/logo"> 
+		</ImageView> 
+
+		<TextView android:layout_height="wrap_content"
+		    android:layout_width="wrap_content"
+		    android:id="@+id/text_header" 
+			android:layout_marginLeft="@dimen/config_row_ListScreen_title_left_and_right_margin" 
+			android:layout_marginRight="@dimen/config_row_ListScreen_title_left_and_right_margin" 
+			android:scrollHorizontally="true"
+			android:textSize="@dimen/config_text_ListScreen_title_size" 
+			android:textColor="@color/plainWhite"
+			android:singleLine="true"
+			android:layout_gravity="center_vertical" 
+			android:gravity="center_vertical"
+			android:typeface="normal"
+			android:text="Example">
+		</TextView> 
+	</LinearLayout>
+	
+	
+	<!-- The divider -->
+	<ImageView android:background="@color/divider"
+	    android:layout_height="@dimen/config_divider_size" 
+		android:layout_width="fill_parent"
+		android:id="@+id/menu_header_divider"/> 
+	
+	<ListView android:id="@+id/my_listview"
+	    android:layout_height="fill_parent"
+	    android:layout_width="fill_parent" 
+	    android:listSelector="@layout/list_selector_background"
+	    android:fadingEdge="none"
+	    android:dividerHeight="1px" 
+		android:divider="@color/divider"
+		android:headerDividersEnabled="true"
+		android:focusable="true"/> 
+</LinearLayout>

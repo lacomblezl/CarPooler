@@ -1,6 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <!-- Default screen margins, per the Android Design guidelines. -->
+    <!-- Parrot Asteroid Classic hardware values -->
+
+
+    <!-- All Screens -->
+    <dimen name="config_row_size">47px</dimen>
+    <dimen name="config_list_row_size">63px</dimen>
+    <dimen name="config_divider_size">1px</dimen>
+
+    <!-- List Screen -->
+    <dimen name="config_text_ListScreen_title_size">30px</dimen>
+    <dimen name="config_picto_ListScreen_title_right_margin">15px</dimen>
+    <dimen name="config_picto_ListScreen_notif_left_margin">15px</dimen>
+    <dimen name="config_row_ListScreen_title_left_and_right_margin">15px</dimen>
+
+    <!-- ListItem -->
+
+
+    <!-- dimensions for layout -->
+    <dimen name="config_text_ListItem_size">26px</dimen>
+    <dimen name="config_picto_ListItem_right_margin">20px</dimen>
+    <dimen name="config_row_ListItem_left_margin">30px</dimen>
+    <dimen name="config_row_ListItem_right_margin">20px</dimen>
     <dimen name="activity_horizontal_margin">16dp</dimen>
     <dimen name="activity_vertical_margin">16dp</dimen>
 

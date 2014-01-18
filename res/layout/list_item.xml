@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<LinearLayout 
+    android:paddingLeft="@dimen/config_row_ListItem_left_margin"
+    android:background="@color/transparent" 
+	android:layout_height="@dimen/config_list_row_size"
+	android:layout_width="fill_parent" 
+	xmlns:android="http://schemas.android.com/apk/res/android" >
+
+	<ImageView
+	    android:layout_height="fill_parent"
+	    android:layout_width="wrap_content"
+	    android:layout_marginRight="@dimen/config_row_ListScreen_title_left_and_right_margin" 
+ 		android:layout_gravity="center_vertical"
+ 		android:src="@layout/icon_infos" 
+		android:id="@+id/image_row" />
+	<!--  android:layout_alignParentLeft="true"
+ 		android:layout_centerVertical="true"-->
+	
+	<TextView android:layout_height="wrap_content"
+	    android:layout_width="wrap_content"
+	    android:layout_gravity="center_vertical"
+		android:marqueeRepeatLimit="marquee_forever"
+		android:ellipsize="marquee"
+		android:scrollHorizontally="true"
+		android:textSize="@dimen/config_text_ListItem_size" 
+		android:gravity="center_vertical"
+		android:textColor="@layout/text_color" 
+		android:singleLine="true"
+		android:typeface="normal"
+		android:id="@+id/text_row"/>
+	
+</LinearLayout>
