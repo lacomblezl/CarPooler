@@ -6,6 +6,7 @@ public class Road
 	private String name;
 	private double length;
 	private double duration;
+	private double price;
 	
 	/** Constructeur de la classe Road
 	 * @pre _
@@ -16,6 +17,7 @@ public class Road
 		this.name = name;
 		length = -1.0;
 		duration = -1.0;
+		price = -1.0;
 	}
 	
 	/** Constructeur alternatif pour la classe Road
@@ -23,11 +25,12 @@ public class Road
 	 * @post Un nouvel objet Road a ete cree, avec this.name==name, this.length==length, et
 	 * this.duration==duration
 	 */
-	public Road(String name, double length, double duration)
+	public Road(String name, double length, double duration, double price)
 	{
 		this.name = name;
 		this.length = length;
 		this.duration = duration;
+		this.price = price;
 	}
 	
 	/** Verifie si this a une longueur connue 
@@ -46,6 +49,15 @@ public class Road
 	public boolean hasDuration()
 	{
 		return (duration != -1.0);
+	}
+	
+	/** Verifie si this a un prix connu 
+	 * @pre _
+	 * @post true est retourne si this a un prix specifie, false sinon
+	 */
+	public boolean hasPrice()
+	{
+		return (price != -1.0);
 	}
 	
 	/* Getters et Setters */
@@ -97,7 +109,21 @@ public class Road
 	{
 		this.duration = duration;
 	}
-	
-	
+
+	/**
+	 * @return the price
+	 */
+	public double getPrice()
+	{
+		return price;
+	}
+
+	/**
+	 * @param price the price to set
+	 */
+	public void setPrice(double price)
+	{
+		this.price = price;
+	}
 
 }
