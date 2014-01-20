@@ -1,5 +1,6 @@
 package com.model.carpooler;
 
+
 /** Cette classe modelise un contact, pour laquelle on maintient des informations et un solde
  * @author Loïc Lacomblez
  */

@@ -1,9 +1,11 @@
 package com.driver.carpooler;
 
-import android.content.Context;
-import android.database.sqlite.SQLiteDatabase;
+import java.util.ArrayList;
 
-import com.utils.carpooler.DBOpenHelper;
+import android.content.Context;
+
+import com.model.carpooler.Contact;
+import com.utils.carpooler.Database;
 
 /**
  * Classe modelisant une instance de l'application.
@@ -13,20 +15,16 @@ import com.utils.carpooler.DBOpenHelper;
 public class CarPooler
 {	
 	public static final int historySize = 50; // definit le nbre d'entrees retenues
-	public static SQLiteDatabase database;
+	public static Database appDatabase;
+	public static ArrayList<Contact> contactList = null;
 	
 	/**
-	 * Gere l'instanciation de la database en modifiant la variable database.
+	 * Gere l'instanciation de la database en modifiant la variable appDatabase.
 	 * @param context
 	 */
 	public static void openDB(Context context)
 	{
-		/* Instanciation de l'openHelper */
-		DBOpenHelper helper = new DBOpenHelper(context);
-		
-		/* Load de la database */
-		//TODO passer en asynchrone pour les perfs
-		database = helper.getWritableDatabase();
+		appDatabase = new Database(context);
 	}
 	
 	

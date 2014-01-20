@@ -3,6 +3,7 @@ package com.utils.carpooler;
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.util.Log;
 
 /** Une classe permettant de gerer la creation et l'instanciation de la database.
  * Suit les recommandations de l'API Android
@@ -22,7 +23,10 @@ public class DBOpenHelper extends SQLiteOpenHelper
     @Override
     public void onCreate(SQLiteDatabase db)
     {
-        db.execSQL(DBContract.CREATE_DB);
+        db.execSQL(DBContract.CREATE_CONTACT_TABLE);
+        
+        //TODO DEBUG PRINT
+        Log.i("info", "Database Creation Suceeded");
     }
 
 	@Override

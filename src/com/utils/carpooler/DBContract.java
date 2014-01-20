@@ -1,7 +1,6 @@
 package com.utils.carpooler;
 
 import android.provider.BaseColumns;
-import android.util.Log;
 
 /**
  * Contrat definissant l'architecture de la database.
@@ -56,7 +55,7 @@ public abstract class DBContract
 		public static final String TABLE_NAME = "Contact";
 		public static final String[] CONTACT_ID = {ContactTable._ID, " INTEGER PRIMARY KEY"};
 		public static final String[] NAME = {"name", " TEXT NOT NULL"};
-		public static final String[] SURNAME = {"surname", " TEXT NOT NULL"};
+		public static final String[] SURNAME = {"firstname", " TEXT NOT NULL"};
 		public static final String[] BILL = {"bill", " REAL NOT NULL"};
 		public static final String[] INFO_ID = {"info_id", " INTEGER REFERENCES " + ContactInfoTable.TABLE_NAME};
 	}
@@ -71,10 +70,14 @@ public abstract class DBContract
 		public static final String TABLE_NAME = "ContactxInfo";
 	}
 
-	/* Some interesting Strings... */
-	public static final String CREATE_DB = "CREATE TABLE " + ContactTable.TABLE_NAME + " (" +
-			ContactTable.CONTACT_ID[0] + ContactTable.CONTACT_ID[1] + ", " + ContactTable.NAME[0] +
-			ContactTable.NAME[1] + ", " + ContactTable.SURNAME[0] + ContactTable.SURNAME[1] + ", " +
-			ContactTable.BILL[0] + ContactTable.BILL[1] + ", " + ContactTable.INFO_ID[0] +
-			ContactTable.INFO_ID[1] + ")";
+	/* Some interesting Strings...
+	 * ATTENTION : Un String de creation par table, sinon ca plante !! 
+	 */
+	public static final String CREATE_CONTACT_TABLE = "CREATE TABLE " + ContactTable.TABLE_NAME + " (" +
+			Utilities.concatList(ContactTable.CONTACT_ID) + ", " +
+			Utilities.concatList(ContactTable.NAME) + ", " +
+			Utilities.concatList(ContactTable.SURNAME) + ", " +
+			Utilities.concatList(ContactTable.BILL) + ", " +
+			Utilities.concatList(ContactTable.INFO_ID)
+			+ ")";
 }
