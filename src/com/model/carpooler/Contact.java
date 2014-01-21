@@ -6,6 +6,7 @@ package com.model.carpooler;
  */
 public class Contact
 {
+	private int id; // permet d'identifier l'entree de la database liee
 	private String name;
 	private String firstName;
 	private Information info;
@@ -17,6 +18,20 @@ public class Contact
 	 * Ses infos sont vides et sa facture est initialisee a zero.
 	 */
 	public Contact(String name, String firstName)
+	{
+		id = -1; // valeur sentinelle
+		this.name = name;
+		this.firstName = firstName;
+		info = new Information();
+		bill = 0.0;
+	}
+	
+	/** Contructeur alternatif de la classe Contact, permet d'inclure l'id.
+	 * @pre _
+	 * @post Un nouvel objet Contact a ete cree, avec comme nom name et comme prenom firstName.
+	 * Ses infos sont vides et sa facture est initialisee a zero.
+	 */
+	public Contact(int id, String name, String firstName)
 	{
 		this.name = name;
 		this.firstName = firstName;
@@ -77,5 +92,17 @@ public class Contact
 	public Double getbill()
 	{
 		return bill;
+	}
+	
+	/** Getter pour this.id */
+	public int getId()
+	{
+		return id;
+	}
+	
+	/** Setter pour this.id */
+	public void setId(int value)
+	{
+		id = value;
 	}
 }

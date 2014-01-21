@@ -8,6 +8,8 @@ import android.database.sqlite.SQLiteDatabase;
 import android.util.Log;
 
 import com.model.carpooler.Contact;
+import com.model.carpooler.Journey;
+import com.model.carpooler.Road;
 
 /**
  * Classe fournissant les outils d'interfacage avec la database (insert, delete, update)
@@ -60,6 +62,7 @@ public class Database
 					Contact tmp = new Contact(cursor.getString(0), cursor.getString(1));
 					tmp.addToBill(cursor.getDouble(2));	
 					result.add(tmp);
+					cursor.moveToNext();
 				}
 		}
 		cursor.close();
@@ -67,10 +70,24 @@ public class Database
 	}
 	
 	/**
+	 * Construit la liste des contacts contenus dans la database
+	 * @pre _
+	 * @post La liste des contacts encodes dans la base de donnee est retournee
+	 */
+	public Cursor contactCursor()
+	{
+		Cursor cursor = mainDatabase.rawQuery("SELECT " + DBContract.ContactTable.NAME[0] + ", " +
+				DBContract.ContactTable.SURNAME[0] + ", " + DBContract.ContactTable.BILL[0] + " FROM "
+				+ DBContract.ContactTable.TABLE_NAME, null);
+		return cursor;
+	}
+	
+	/**
 	 * Insere un objet dans la database a l'endroit adequat.
 	 */
 	public void insert(Object item)
 	{
+		// TODO ajouter les contacts du trajet dans la table JourneyxContact !
 		String command = insertCommand(item);
 		if(command == null)
 			return;
@@ -83,15 +100,35 @@ public class Database
 	 */
 	private String insertCommand(Object item)
 	{
-		if(item instanceof Contact)
+		if(item instanceof Journey)
+		{
+			Journey tmp = (Journey) item;
+			return "INSERT INTO " + DBContract.JourneyTable.TABLE_NAME + " (" +
+					DBContract.JourneyTable.DATE[0] + ", " +
+					DBContract.JourneyTable.ROADNAME[0] + ") VALUES (" +
+					"\"" + tmp.getDate().toString() + "\"" + " ," +
+					"\"" + tmp.getRoad().getName() + "\")";
+		}
+		else if(item instanceof Road)
+		{
+			Road tmp = (Road) item;
+			return "INSERT INTO " + DBContract.RoadTable.TABLE_NAME + " (" +
+				DBContract.RoadTable.ROADNAME[0] + " ," +
+				DBContract.RoadTable.LENGTH[0] + " ," +
+				DBContract.RoadTable.DURATION[0] + " ," +
+				DBContract.RoadTable.PRICE[0] + ") VALUES (" +
+				"\"" + tmp.getName() + "\"" + " ," + "\"" + tmp.getLength() + "\"" + " ," +
+				"\"" + tmp.getDuration() + "\"" + " ," + "\"" + tmp.getPrice() + "\")";
+ 		}
+		else if(item instanceof Contact)
 		{
 			Contact tmp = (Contact) item;
 			return "INSERT INTO " + DBContract.ContactTable.TABLE_NAME + " (" +
 					DBContract.ContactTable.NAME[0] + " ," +
 					DBContract.ContactTable.SURNAME[0] + " ," +
 					DBContract.ContactTable.BILL[0] + ") VALUES (" +
-					tmp.getName() + " ," + tmp.getFirstName() + " ," +
-					tmp.getbill() + ")";
+					"\"" + tmp.getName() + "\"" + " ," + "\"" + tmp.getFirstName() + "\"" +
+					" ," + "\"" + tmp.getbill() + "\"" + ")";
 		}
 		else
 			return null;

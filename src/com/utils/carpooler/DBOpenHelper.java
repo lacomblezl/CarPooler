@@ -23,17 +23,18 @@ public class DBOpenHelper extends SQLiteOpenHelper
     @Override
     public void onCreate(SQLiteDatabase db)
     {
+    	db.execSQL(DBContract.CREATE_JOURNEY_TABLE);
+    	db.execSQL(DBContract.CREATE_JOURNEY_CONTACT_TABLE);
+    	db.execSQL(DBContract.CREATE_ROAD_TABLE);
         db.execSQL(DBContract.CREATE_CONTACT_TABLE);
-        
-        //TODO DEBUG PRINT
+
         Log.i("info", "Database Creation Suceeded");
     }
 
 	@Override
 	public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion)
 	{
-		// TODO Auto-generated method stub
-		
+		// Auto-generated method stub
 	}
 
 }
