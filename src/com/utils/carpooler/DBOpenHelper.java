@@ -27,6 +27,7 @@ public class DBOpenHelper extends SQLiteOpenHelper
     	db.execSQL(DBContract.CREATE_JOURNEY_CONTACT_TABLE);
     	db.execSQL(DBContract.CREATE_ROAD_TABLE);
         db.execSQL(DBContract.CREATE_CONTACT_TABLE);
+        db.execSQL(DBContract.CREATE_INFO_TABLE);
 
         Log.i("info", "Database Creation Suceeded");
     }

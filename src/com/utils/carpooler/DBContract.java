@@ -19,7 +19,7 @@ public abstract class DBContract
 	public static abstract class JourneyTable implements BaseColumns
 	{
 		public static final String TABLE_NAME = "Journey";
-		public static final String[] JOURNEY_ID = {"\"" + JourneyTable._ID + "\"", " INTEGER PRIMARY KEY"};
+		public static final String[] JOURNEY_ID = {"\"journey_id\"", " INTEGER PRIMARY KEY"};
 		public static final String[] DATE = {"\"date\"", " TEXT NOT NULL"};
 		public static final String[] ROADNAME = {"\"roadname\"", " TEXT NOT NULL REFERENCES "+RoadTable.TABLE_NAME};
 	}
@@ -32,8 +32,8 @@ public abstract class DBContract
 	public static abstract class JourneyContactTable implements BaseColumns
 	{
 		public static final String TABLE_NAME = "JourneyxContact";
-		public static final String[] JOURNEY_ID = {"\"" + JourneyTable._ID + "\"", " INTEGER NOT NULL REFERENCES "+JourneyTable.TABLE_NAME};
-		public static final String[] CONTACT_ID = {"\"contactid\"", " INTEGER NOT NULL REFERENCES " + ContactTable.TABLE_NAME};
+		public static final String[] JOURNEY_ID = {"\"journey_id\"", " INTEGER NOT NULL REFERENCES "+JourneyTable.TABLE_NAME};
+		public static final String[] CONTACT_ID = {"\"contact_id\"", " INTEGER NOT NULL REFERENCES " + ContactTable.TABLE_NAME};
 	}
 	
 	/**
@@ -60,11 +60,11 @@ public abstract class DBContract
 	public static abstract class ContactTable implements BaseColumns
 	{
 		public static final String TABLE_NAME = "Contact";
-		public static final String[] CONTACT_ID = {"\"" + ContactTable._ID + "\"", " INTEGER PRIMARY KEY AUTOINCREMENT"};
+		public static final String[] CONTACT_ID = {"\"contact_id\"", " INTEGER PRIMARY KEY"};
 		public static final String[] NAME = {"\"name\"", " TEXT NOT NULL"};
 		public static final String[] SURNAME = {"\"firstname\"", " TEXT NOT NULL"};
 		public static final String[] BILL = {"\"bill\"", " REAL NOT NULL"};
-		public static final String[] INFO_ID = {"\"info_id\"", " INTEGER REFERENCES " + ContactInfoTable.TABLE_NAME};
+		public static final String[] INFO_ID = {"\"info_id\"", " INTEGER REFERENCES " + InfoTable.TABLE_NAME};
 	}
 	
 	/**
@@ -72,9 +72,10 @@ public abstract class DBContract
 	 * @author Loic Lacomblez
 	 *
 	 */
-	public static abstract class ContactInfoTable implements BaseColumns
+	public static abstract class InfoTable implements BaseColumns
 	{
-		public static final String TABLE_NAME = "ContactxInfo";
+		public static final String TABLE_NAME = "Info";
+		public static final String[] INFO_ID = {"\"info_id\"", " INTEGER PRIMARY KEY"};
 	}
 
 	/* Some interesting Strings...
@@ -107,4 +108,7 @@ public abstract class DBContract
 			Utilities.concatList(ContactTable.BILL) + ", " +
 			Utilities.concatList(ContactTable.INFO_ID)
 			+ ")";
+	
+	public static final String CREATE_INFO_TABLE = "CREATE TABLE " + InfoTable.TABLE_NAME + " (" +
+			Utilities.concatList(InfoTable.INFO_ID) + ")";
 }

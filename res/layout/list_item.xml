@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<LinearLayout 
+<LinearLayout
     android:paddingLeft="@dimen/config_row_ListItem_left_margin"
     android:background="@color/transparent" 
 	android:layout_height="@dimen/config_list_row_size"
