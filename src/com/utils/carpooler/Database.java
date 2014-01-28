@@ -70,12 +70,14 @@ public class Database
 		return result;
 	}
 	
+	//TODO loadJourney
+	//TODO loadRoads
+	
 	/**
 	 * Insere un objet dans la database a l'endroit adequat.
 	 */
 	public void insert(Object item)
 	{
-		// TODO ajouter les contacts du trajet dans la table JourneyxContact !
 		if(item instanceof Journey)
 		{
 			Journey tmp = (Journey) item;
@@ -101,7 +103,8 @@ public class Database
 					Log.e("error", "Error while inserting the Journey" + id + "in database");
 				toAdd.clear();
 			}
-			
+			//TODO DEBUG PRINT
+			Log.i("info", "Enregistrement dans la table Journey reussi");
 			return;
 		}
 		String command = insertCommand(item);
@@ -124,8 +127,8 @@ public class Database
 				DBContract.RoadTable.LENGTH[0] + " ," +
 				DBContract.RoadTable.DURATION[0] + " ," +
 				DBContract.RoadTable.PRICE[0] + ") VALUES (" +
-				"\"" + tmp.getName() + "\"" + " ," + tmp.getLength().toString() + " ," +
-				tmp.getDuration().toString() + " ," + tmp.getPrice().toString() + "\")";
+				"\"" + tmp.getName() + "\"" + " ," + tmp.getLength() + " ," +
+				tmp.getDuration() + " ," + tmp.getPrice() + "\")";
  		}
 		else if(item instanceof Contact)
 		{
@@ -135,7 +138,7 @@ public class Database
 					DBContract.ContactTable.SURNAME[0] + " ," +
 					DBContract.ContactTable.BILL[0] + ") VALUES (" +
 					"\"" + tmp.getName() + "\"" + " ," + "\"" + tmp.getFirstName() + "\"" +
-					" ," + tmp.getbill().toString() + ")";
+					" ," + tmp.getbill() + ")";
 		}
 		else
 			return null;

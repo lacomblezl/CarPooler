@@ -1,3 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical"
@@ -11,19 +12,16 @@
 	<LinearLayout android:orientation="horizontal"
 	    android:background="@drawable/toptitlebar3"
 	    android:layout_height="@dimen/config_row_size" 
-		android:layout_width="fill_parent"
-		android:id="@+id/header"> 
+		android:layout_width="fill_parent" > 
 	
 		<ImageView android:layout_height="wrap_content"
-		    android:layout_width="wrap_content"
-		    android:id="@+id/image_header" 
+		    android:layout_width="wrap_content" 
 			android:layout_marginLeft="@dimen/config_picto_ListScreen_notif_left_margin"
 			android:src="@drawable/logo"> 
 		</ImageView> 
 
 		<TextView android:layout_height="wrap_content"
 		    android:layout_width="wrap_content"
-		    android:id="@+id/text_header" 
 			android:layout_marginLeft="@dimen/config_row_ListScreen_title_left_and_right_margin" 
 			android:layout_marginRight="@dimen/config_row_ListScreen_title_left_and_right_margin" 
 			android:scrollHorizontally="true"
@@ -41,12 +39,11 @@
 	<!-- The divider -->
 	<ImageView android:background="@color/divider"
 	    android:layout_height="@dimen/config_divider_size" 
-		android:layout_width="fill_parent"
-		android:id="@+id/menu_header_divider"/>
+		android:layout_width="fill_parent"/>
     
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/hello_world" />
+	
+    <ListView android:id="@+id/home_list"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"/>
 
 </LinearLayout>

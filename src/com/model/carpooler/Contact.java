@@ -89,7 +89,7 @@ public class Contact
 	}
 
 	/** Getter pour this.sold */
-	public Double getbill()
+	public double getbill()
 	{
 		return bill;
 	}
