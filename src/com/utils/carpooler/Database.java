@@ -124,8 +124,8 @@ public class Database
 				DBContract.RoadTable.LENGTH[0] + " ," +
 				DBContract.RoadTable.DURATION[0] + " ," +
 				DBContract.RoadTable.PRICE[0] + ") VALUES (" +
-				"\"" + tmp.getName() + "\"" + " ," + "\"" + tmp.getLength() + "\"" + " ," +
-				"\"" + tmp.getDuration() + "\"" + " ," + "\"" + tmp.getPrice() + "\")";
+				"\"" + tmp.getName() + "\"" + " ," + tmp.getLength().toString() + " ," +
+				tmp.getDuration().toString() + " ," + tmp.getPrice().toString() + "\")";
  		}
 		else if(item instanceof Contact)
 		{
@@ -135,7 +135,7 @@ public class Database
 					DBContract.ContactTable.SURNAME[0] + " ," +
 					DBContract.ContactTable.BILL[0] + ") VALUES (" +
 					"\"" + tmp.getName() + "\"" + " ," + "\"" + tmp.getFirstName() + "\"" +
-					" ," + "\"" + tmp.getbill() + "\"" + ")";
+					" ," + tmp.getbill().toString() + ")";
 		}
 		else
 			return null;
