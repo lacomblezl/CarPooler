@@ -2,6 +2,7 @@ package com.utils.carpooler;
 
 import java.util.ArrayList;
 
+import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
@@ -70,24 +71,39 @@ public class Database
 	}
 	
 	/**
-	 * Construit la liste des contacts contenus dans la database
-	 * @pre _
-	 * @post La liste des contacts encodes dans la base de donnee est retournee
-	 */
-	public Cursor contactCursor()
-	{
-		Cursor cursor = mainDatabase.rawQuery("SELECT " + DBContract.ContactTable.NAME[0] + ", " +
-				DBContract.ContactTable.SURNAME[0] + ", " + DBContract.ContactTable.BILL[0] + " FROM "
-				+ DBContract.ContactTable.TABLE_NAME, null);
-		return cursor;
-	}
-	
-	/**
 	 * Insere un objet dans la database a l'endroit adequat.
 	 */
 	public void insert(Object item)
 	{
 		// TODO ajouter les contacts du trajet dans la table JourneyxContact !
+		if(item instanceof Journey)
+		{
+			Journey tmp = (Journey) item;
+			
+			/* Insertion dans la table Journey */
+			ContentValues toAdd = new ContentValues();
+			toAdd.put(DBContract.JourneyTable.DATE[0], tmp.getDate().toString());
+			toAdd.put(DBContract.JourneyTable.ROADNAME[0], tmp.getRoad().getName());
+
+			long id = mainDatabase.insert(DBContract.JourneyTable.TABLE_NAME, null, toAdd);
+			if(id==-1)
+				Log.e("error", "Error while inserting the Journey" + id + "in database");
+			
+			/* Insertion dans la table JourenyxContacts */
+			toAdd.clear();
+			long retval;
+			for(Contact contact:tmp.getContact())
+			{
+				toAdd.put(DBContract.JourneyContactTable.JOURNEY_ID[0], id);
+				toAdd.put(DBContract.JourneyContactTable.CONTACT_ID[0], contact.getId());
+				retval = mainDatabase.insert(DBContract.JourneyContactTable.TABLE_NAME, null, toAdd);
+				if(retval==-1)
+					Log.e("error", "Error while inserting the Journey" + id + "in database");
+				toAdd.clear();
+			}
+			
+			return;
+		}
 		String command = insertCommand(item);
 		if(command == null)
 			return;
@@ -100,16 +116,7 @@ public class Database
 	 */
 	private String insertCommand(Object item)
 	{
-		if(item instanceof Journey)
-		{
-			Journey tmp = (Journey) item;
-			return "INSERT INTO " + DBContract.JourneyTable.TABLE_NAME + " (" +
-					DBContract.JourneyTable.DATE[0] + ", " +
-					DBContract.JourneyTable.ROADNAME[0] + ") VALUES (" +
-					"\"" + tmp.getDate().toString() + "\"" + " ," +
-					"\"" + tmp.getRoad().getName() + "\")";
-		}
-		else if(item instanceof Road)
+		if(item instanceof Road)
 		{
 			Road tmp = (Road) item;
 			return "INSERT INTO " + DBContract.RoadTable.TABLE_NAME + " (" +

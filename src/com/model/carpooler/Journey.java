@@ -45,6 +45,17 @@ public class Journey
 	{
 		this.contacts.remove(contact);
 	}
+	
+	/**
+	 * Retourne la liste des contacts associes a ce trajet
+	 * @pre _
+	 * @post la liste des contacts est retournee, ces derniers sont tries selon
+	 * l'ordre dans lequel ils ont ete ajoutes.
+	 */
+	public ArrayList<Contact> getContact()
+	{
+		return contacts;
+	}
 
 	/**
 	 * @return the road

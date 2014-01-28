@@ -5,28 +5,21 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
 
-import android.app.Activity;
-import android.content.Context;
-import android.content.Intent;
+import com.driver.carpooler.CarPooler;
+import com.model.carpooler.Contact;
+
 import android.os.Bundle;
+import android.app.Activity;
 import android.view.Menu;
 import android.view.View;
-import android.widget.AdapterView;
-import android.widget.AdapterView.OnItemClickListener;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
 import android.widget.TextView;
 
-import com.driver.carpooler.CarPooler;
-import com.model.carpooler.Contact;
-
-public class HomeActivity extends Activity
+public class TestActivity extends Activity
 {
-	//liste des boutons du menu 
-	public int[] listText = {R.string.new_journey, R.string.contacts,
-			R.string.roads, R.string.history};
-	public int[] listIcon = {};
+	private TextView textField;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState)
@@ -86,25 +79,6 @@ public class HomeActivity extends Activity
 		    SimpleAdapter listAdapter = new SimpleAdapter(getApplicationContext(), data,
 		    		R.layout.list_item, from, to);
 		    list.setAdapter(listAdapter);
-	}
-	
-	/**
-	 * Associe le listener aux elements de la liste
-	 */
-	private void setListener(Context activity, ListView list)
-	{
-		Intent intent;
-		OnItemClickListener listener = new OnItemClickListener()
-		{
-			@Override
-			public void onItemClick(AdapterView<?> arg0, View arg1,int position, long arg3)
-			{
-				switch (position) {
-				case 0: 
-				}
-				activity.startActivity(intent);
-			}
-		};
 	}
 
 }
