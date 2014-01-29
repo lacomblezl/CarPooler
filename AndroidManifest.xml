@@ -24,6 +24,22 @@
             android:name="com.activities.carpooler.TestActivity"
             android:label="@string/title_activity_test" >
         </activity>
+        <activity
+            android:name="com.activities.carpooler.HistoryActivity"
+            android:label="@string/title_activity_history" >
+        </activity>
+        <activity
+            android:name="com.activities.carpooler.RoadListActivity"
+            android:label="@string/title_activity_road_list" >
+        </activity>
+        <activity
+            android:name="com.activities.carpooler.NewJourneyActivity"
+            android:label="@string/title_activity_new_journey" >
+        </activity>
+        <activity
+            android:name="com.activities.carpooler.ContactListActivity"
+            android:label="@string/title_activity_contact_list" >
+        </activity>
     </application>
 
 </manifest>

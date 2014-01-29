@@ -103,8 +103,6 @@ public class Database
 					Log.e("error", "Error while inserting the Journey" + id + "in database");
 				toAdd.clear();
 			}
-			//TODO DEBUG PRINT
-			Log.i("info", "Enregistrement dans la table Journey reussi");
 			return;
 		}
 		String command = insertCommand(item);

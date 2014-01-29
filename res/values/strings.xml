@@ -10,5 +10,9 @@
     <string name="history">Historique</string>
     <string name="image">An Image</string>
     <string name="title_activity_test">Test</string>
+    <string name="title_activity_history">HistoryActivity</string>
+    <string name="title_activity_road_list">RoadListActivity</string>
+    <string name="title_activity_new_journey">NewJourneyActivity</string>
+    <string name="title_activity_contact_list">ContactListActivity</string>
 
 </resources>
