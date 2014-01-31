@@ -7,14 +7,13 @@
 	xmlns:android="http://schemas.android.com/apk/res/android" >
 
 	<ImageView
+	    android:contentDescription="@string/image"
 	    android:layout_height="fill_parent"
 	    android:layout_width="wrap_content"
 	    android:layout_marginRight="@dimen/config_row_ListScreen_title_left_and_right_margin" 
  		android:layout_gravity="center_vertical"
- 		android:src="@layout/icon_infos" 
 		android:id="@+id/image_row" />
-	<!--  android:layout_alignParentLeft="true"
- 		android:layout_centerVertical="true"-->
+
 	
 	<TextView android:layout_height="wrap_content"
 	    android:layout_width="wrap_content"

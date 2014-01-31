@@ -7,16 +7,16 @@ import android.view.Menu;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
-import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
 import com.driver.carpooler.CarPooler;
+import com.graphics.carpooler.LogoList;
+import com.graphics.carpooler.LogoListAdapter;
 
 public class HomeActivity extends Activity
 {
 	//liste des boutons du menu 
-	public String[] listText = new String[4];
-	public int[] listIcon = new int[4];
+	private LogoList[] homeMenu;
 	
 	ListView listMenu;
 
@@ -29,15 +29,14 @@ public class HomeActivity extends Activity
 		/* Instanciation de la database */
 		CarPooler.openDB(getApplicationContext());
 		
-		listText[0]=getString(R.string.new_journey);
-		listText[1]=getString(R.string.contacts);
-		listText[2]=getString(R.string.roads);
-		listText[3]=getString(R.string.history);
-	    
+		/* Remplissage du menu */
+		fillMenu();
+		
 		listMenu = (ListView) findViewById(R.id.home_list);
 		
 		/* remplissage de la liste et listener sur chaque element de la liste */
-		listMenu.setAdapter(new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, listText));
+		LogoListAdapter adapter = new LogoListAdapter(this, R.layout.list_item, homeMenu);
+		listMenu.setAdapter(adapter);
 		listMenu.setOnItemClickListener(menuListener);
 	}
 
@@ -47,6 +46,19 @@ public class HomeActivity extends Activity
 		// Inflate the menu; this adds items to the action bar if it is present.
 		getMenuInflater().inflate(R.menu.home, menu);
 		return true;
+	}
+	
+	/**
+	 * Methode remplissant le menu principal de l'application
+	 */
+	private void fillMenu()
+	{
+		//TODO Mettre de vraies icones !
+		homeMenu = new LogoList[4];
+		homeMenu[0] = new LogoList(R.drawable.menuicon_infos_grey, getString(R.string.new_journey));
+		homeMenu[1] = new LogoList(R.drawable.menuicon_infos_grey, getString(R.string.contacts));
+		homeMenu[2] = new LogoList(R.drawable.menuicon_infos_grey, getString(R.string.roads));
+		homeMenu[3] = new LogoList(R.drawable.menuicon_infos_grey, getString(R.string.history));
 	}
 	
 	/**
