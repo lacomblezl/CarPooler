@@ -48,9 +48,9 @@ public class Database
 		//TODO gestion des infos
 		
 		/* Requete SQL */
-		Cursor cursor = mainDatabase.rawQuery("SELECT " + DBContract.ContactTable.NAME[0] + ", " +
-				DBContract.ContactTable.SURNAME[0] + ", " + DBContract.ContactTable.BILL[0] + " FROM "
-				+ DBContract.ContactTable.TABLE_NAME, null);
+		Cursor cursor = mainDatabase.rawQuery("SELECT " + DBContract.ContactTable.CONTACT_ID[0] + ", " +
+				DBContract.ContactTable.NAME[0] + ", " + DBContract.ContactTable.SURNAME[0] + ", " + 
+				DBContract.ContactTable.BILL[0] + " FROM " + DBContract.ContactTable.TABLE_NAME, null);
 		
 		ArrayList<Contact> result = new ArrayList<Contact>();
 		
@@ -60,8 +60,8 @@ public class Database
 				while(!cursor.isAfterLast())
 				{
 					/* Instancie le nouveau contact */
-					Contact tmp = new Contact(cursor.getString(0), cursor.getString(1));
-					tmp.addToBill(cursor.getDouble(2));	
+					Contact tmp = new Contact(cursor.getInt(0), cursor.getString(1), cursor.getString(2));
+					tmp.addToBill(cursor.getDouble(3));	
 					result.add(tmp);
 					cursor.moveToNext();
 				}
@@ -70,7 +70,36 @@ public class Database
 		return result;
 	}
 	
-	//TODO loadJourney
+	/**
+	 * Construit la liste des itineraires contenus dans la database
+	 * @pre _
+	 * @post La liste des itineraires encodes dans la base de donnee est retournee
+	 */
+	public ArrayList<Road> loadRoads()
+	{
+		/* Requete SQL */
+		Cursor cursor = mainDatabase.rawQuery("SELECT " + DBContract.RoadTable.ROADNAME[0] + ", " +
+				DBContract.RoadTable.LENGTH[0] + ", " + DBContract.RoadTable.DURATION[0] + ", " +
+				DBContract.RoadTable.PRICE[0] + " FROM " + DBContract.RoadTable.TABLE_NAME, null);
+		
+		ArrayList<Road> result = new ArrayList<Road>();
+		
+		/* Parcour du resultat */
+		if(cursor.moveToFirst())
+		{
+				while(!cursor.isAfterLast())
+				{
+					/* Instancie la nouvelle route */
+					Road tmp = new Road(cursor.getString(0), cursor.getDouble(1), cursor.getDouble(2),
+							cursor.getDouble(3));	
+					result.add(tmp);
+					cursor.moveToNext();
+				}
+		}
+		cursor.close();
+		return result;
+	}
+	
 	//TODO loadRoads
 	
 	/**
@@ -126,7 +155,7 @@ public class Database
 				DBContract.RoadTable.DURATION[0] + " ," +
 				DBContract.RoadTable.PRICE[0] + ") VALUES (" +
 				"\"" + tmp.getName() + "\"" + " ," + tmp.getLength() + " ," +
-				tmp.getDuration() + " ," + tmp.getPrice() + "\")";
+				tmp.getDuration() + " ," + tmp.getPrice() + ")";
  		}
 		else if(item instanceof Contact)
 		{

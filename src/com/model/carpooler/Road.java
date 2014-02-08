@@ -33,6 +33,12 @@ public class Road
 		this.price = price;
 	}
 	
+	@Override
+	public String toString()
+	{
+		return name; 
+	}
+	
 	/** Verifie si this a une longueur connue 
 	 * @pre _
 	 * @post true est retourne si this a une longueur specifiee, false sinon

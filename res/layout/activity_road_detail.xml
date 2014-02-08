@@ -1,0 +1,130 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".RoadDetailActivity" >
+
+     <!-- header -->
+	<LinearLayout android:orientation="horizontal"
+	    android:background="@drawable/toptitlebar3"
+	    android:layout_height="@dimen/config_row_size" 
+		android:layout_width="fill_parent" > 
+	
+		<ImageView android:layout_height="wrap_content"
+		    android:layout_width="wrap_content" 
+			android:layout_marginLeft="@dimen/config_picto_ListScreen_notif_left_margin"
+			android:src="@drawable/logo"> 
+		</ImageView> 
+
+		<TextView android:layout_height="wrap_content"
+		    android:layout_width="wrap_content"
+			android:layout_marginLeft="@dimen/config_row_ListScreen_title_left_and_right_margin" 
+			android:layout_marginRight="@dimen/config_row_ListScreen_title_left_and_right_margin" 
+			android:scrollHorizontally="true"
+			android:textSize="@dimen/config_text_ListScreen_title_size" 
+			android:textColor="@color/plainWhite"
+			android:singleLine="true"
+			android:layout_gravity="center_vertical" 
+			android:gravity="center_vertical"
+			android:typeface="normal"
+			android:text="Example">
+		</TextView> 
+	</LinearLayout>
+	
+	
+	<!-- The divider -->
+	<ImageView android:background="@color/divider"
+	    android:layout_height="@dimen/config_divider_size" 
+		android:layout_width="fill_parent"/>
+	
+	<!-- Champs editables -->
+	<LinearLayout android:orientation="vertical"
+	    android:layout_width="fill_parent"
+	    android:layout_height="fill_parent"
+	    android:paddingLeft="@dimen/activity_horizontal_margin"
+	    android:paddingRight="@dimen/activity_horizontal_margin" >
+	
+		<TextView android:layout_width="fill_parent"
+		    android:layout_height="wrap_content"
+		    android:text="@string/roadname" />
+		
+		<EditText android:id="@+id/name_field"
+		    android:layout_width="fill_parent"
+		    android:layout_height="wrap_content"
+		    android:inputType="text"
+		    android:focusable="false" />
+		
+			<!-- The divider -->
+		<ImageView android:background="@color/divider"
+	    android:layout_height="@dimen/config_divider_size" 
+		android:layout_width="fill_parent"/>
+		
+		<!-- Length -->
+		<LinearLayout android:orientation="horizontal"
+		    android:layout_width="fill_parent"
+		    android:layout_height="wrap_content" >
+		    
+		    <TextView 
+		        android:layout_width="0dp"
+		        android:layout_height="wrap_content"
+		        android:layout_weight="1"
+		        android:text="@string/length" />
+		    
+		    <EditText android:id="@+id/length_field"
+		        android:layout_width="0dp"
+		    	android:layout_height="wrap_content"
+		    	android:layout_weight="1"
+		    	android:inputType="number"
+		    	android:focusable="false" />	    
+		</LinearLayout>
+		
+		<!-- Duration -->
+		<LinearLayout android:orientation="horizontal"
+		    android:layout_width="fill_parent"
+		    android:layout_height="wrap_content" >
+		    
+		    <TextView 
+		        android:layout_width="0dp"
+		        android:layout_height="wrap_content"
+		        android:layout_weight="1"
+		        android:text="@string/duration" />
+		    
+		    <EditText android:id="@+id/duration_field"
+		        android:layout_width="0dp"
+		    	android:layout_height="wrap_content"
+		    	android:layout_weight="1"
+		    	android:inputType="time"
+		    	android:focusable="false" />	    
+		</LinearLayout>
+		
+		<!-- Price -->
+		<LinearLayout android:orientation="horizontal"
+		    android:layout_width="fill_parent"
+		    android:layout_height="wrap_content" >
+		    
+		    <TextView 
+		        android:layout_width="0dp"
+		        android:layout_height="wrap_content"
+		        android:layout_weight="1"
+		        android:text="@string/price" />
+		    
+		    <EditText android:id="@+id/price_field"
+		        android:layout_width="0dp"
+		    	android:layout_height="wrap_content"
+		    	android:layout_weight="1"
+		    	android:inputType="number"
+		    	android:focusable="false" />	    
+		</LinearLayout>
+		
+		<!-- Bouton pour creer un trajet -->
+		<Button android:id="@+id/create_button"
+		    	android:layout_width="wrap_content"
+		    	android:layout_height="wrap_content"
+		    	android:layout_gravity="center"
+		    	android:text="@string/create_road"
+		    	android:visibility="gone" />
+		
+</LinearLayout>
+	
+</LinearLayout>

@@ -14,5 +14,12 @@
     <string name="title_activity_road_list">RoadListActivity</string>
     <string name="title_activity_new_journey">NewJourneyActivity</string>
     <string name="title_activity_contact_list">ContactListActivity</string>
+    <string name="title_activity_road_detail">RoadDetailActivity</string>
+    <string name="roadname">Nom du Trajet</string>
+    <string name="length">Longueur</string>
+    <string name="duration">Durée</string>
+    <string name="price">Prix</string>
+    <string name="create_road">Nouvel Itinéraire</string>
+    <string name="unknown"><i>Inconnu</i></string>
 
 </resources>

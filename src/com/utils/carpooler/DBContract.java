@@ -44,7 +44,7 @@ public abstract class DBContract
 	public static abstract class RoadTable implements BaseColumns
 	{
 		public static final String TABLE_NAME = "Road";
-		public static final String[] ROADNAME = {"\"roadname\"", " TEXT PRIMARY KEY"};
+		public static final String[] ROADNAME = {"\"rroadname\"", " TEXT PRIMARY KEY"};
 		public static final String[] LENGTH = {"\"length\"", " REAL"};
 		public static final String[] DURATION = {"\"duration\"", " TEXT"};
 		public static final String[] PRICE = {"\"price\"", " REAL NOT NULL"};
