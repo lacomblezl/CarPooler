@@ -1,6 +1,10 @@
 package com.utils.carpooler;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
+import java.util.Iterator;
 
 import android.content.ContentValues;
 import android.content.Context;
@@ -34,7 +38,7 @@ public class Database
 		//TODO passer en asynchrone pour les perfs
 		mainDatabase = helper.getWritableDatabase();
 		
-		//TODO DEBUG PRINT
+		/* DEBUG PRINT */
 		Log.i("info", "Database Loading Suceeded");
 	}
 	
@@ -59,10 +63,10 @@ public class Database
 		{
 				while(!cursor.isAfterLast())
 				{
-					/* Instancie le nouveau contact */
+					/* Instancie le nouveau contact : id-nom-prenom */
 					Contact tmp = new Contact(cursor.getInt(0), cursor.getString(1), cursor.getString(2));
 					tmp.addToBill(cursor.getDouble(3));	
-					result.add(tmp);
+					result.add((int) (tmp.getId()-1), tmp); //TODO verifier qu'il n'y a pas d'id 0 et que tout se passe bien !
 					cursor.moveToNext();
 				}
 		}
@@ -100,10 +104,103 @@ public class Database
 		return result;
 	}
 	
-	//TODO loadRoads
+	//TODO LoadHistory
+	/**
+	 * Cree un ArrayList 
+	 * @pre loadContact a deja ete appele pour remplir contactList
+	 * @return
+	 */
+	public ArrayList<Journey> loadHistory(ArrayList<Contact> contactList, ArrayList<Road> roadList)
+	{
+		/* Requete SQL */
+		Cursor cursor = mainDatabase.rawQuery("SELECT " + DBContract.JourneyTable.JOURNEY_ID[0] + ", " +
+				DBContract.JourneyTable.DATE[0] + ", " + DBContract.JourneyTable.ROADNAME[0] +
+				" FROM " + DBContract.JourneyTable.TABLE_NAME, null);
+		
+		ArrayList<Journey> result = new ArrayList<Journey>();
+		
+		/* Contruction du resultat */
+		if(cursor.moveToFirst())
+		{
+			while(!cursor.isAfterLast())
+			{
+				/* Requete SQL secondaire pour construire les sous-listes de contacts */
+				long id = cursor.getLong(0);
+				Cursor contacts = mainDatabase.rawQuery("SELECT " +
+						DBContract.JourneyContactTable.CONTACT_ID[0] + " FROM " + DBContract.JourneyContactTable.TABLE_NAME +
+						" WHERE " + DBContract.JourneyContactTable.JOURNEY_ID[0] + "=" + Long.toString(id), null);
+				
+				/* Construction de la liste de contact sur base de l'ArrayList contactList */
+				ArrayList<Contact> subList = new ArrayList<Contact>();
+				if(contacts.moveToFirst())
+				{
+					while(!contacts.isAfterLast())
+					{
+						subList.add(contactList.get((int) (contacts.getLong(0)-1)));
+					}
+				}
+				contacts.close();
+				
+				/* Ajout du nouveau Journey a result */
+				Journey newJourney;
+				Road newRoad = findByName(cursor.getString(2), roadList);
+				Date newDate;
+				try
+				{
+					newDate = new SimpleDateFormat("EEE MMM dd HH:mm:ss zzz yyyy").parse(cursor.getString(1));
+				}
+				catch (ParseException e)
+				{
+					Log.e("error", "Unvalid date format found in Journey " + cursor.getLong(0));
+					return result;
+				}
+				if(newRoad==null)
+				{
+					Log.e("error", "Unvalid roadName found in Journey " + cursor.getLong(0));
+					return result;
+				}
+				try
+				{
+					newJourney = new Journey(subList, newRoad, newDate);
+				}
+				catch(EmptyContactListException e)
+				{
+					Log.e("error", "No contacts linked to this Journey (id:" + cursor.getLong(0) + ")");
+					return result;
+				}
+				result.add(newJourney);
+			}
+		}
+		cursor.close();
+		return result;
+	}
 	
 	/**
+	 * Methode secondaire - retourne l'objet Road dont le nom est 'toFind' contenu
+	 * dans l'ArrayList 'list'
+	 */
+	Road findByName(String toFind, ArrayList<Road> list)
+	{
+		Road tmp;
+		Iterator<Road> it = list.iterator();
+		while(it.hasNext())
+		{
+			tmp = it.next();
+			if(tmp.getName().equals(toFind))
+			{
+				return tmp;
+			}
+		}
+		return null;
+	}
+
+	/**
 	 * Insere un objet dans la database a l'endroit adequat.
+	 * @pre _
+	 * @post l'objet item a ete insere dans la database s'il est compatible, sinon rien
+	 * 		n'est fait et une erreur est ecrite dans Log.e
+	 * 		 Si l'objet est de type Contact, ce dernier est mis a jour avec son id unique
+	 * 		 une fois qu'il a ete insere dans la database. 
 	 */
 	public void insert(Object item)
 	{
@@ -118,7 +215,9 @@ public class Database
 
 			long id = mainDatabase.insert(DBContract.JourneyTable.TABLE_NAME, null, toAdd);
 			if(id==-1)
-				Log.e("error", "Error while inserting the Journey" + id + "in database");
+			{
+				Log.e("error", "Error while inserting new Journey in database");
+			}
 			
 			/* Insertion dans la table JourenyxContacts */
 			toAdd.clear();
@@ -129,14 +228,42 @@ public class Database
 				toAdd.put(DBContract.JourneyContactTable.CONTACT_ID[0], contact.getId());
 				retval = mainDatabase.insert(DBContract.JourneyContactTable.TABLE_NAME, null, toAdd);
 				if(retval==-1)
+				{
 					Log.e("error", "Error while inserting the Journey" + id + "in database");
+				}
 				toAdd.clear();
 			}
 			return;
 		}
+		
+		if(item instanceof Contact)
+		{
+			Contact tmp = (Contact) item;
+			
+			/* Insertion dans la table Contact */
+			ContentValues toAdd = new ContentValues();
+			toAdd.put(DBContract.ContactTable.NAME[0], tmp.getName());
+			toAdd.put(DBContract.ContactTable.SURNAME[0], tmp.getFirstName());
+			toAdd.put(DBContract.ContactTable.BILL[0], tmp.getbill());
+			
+			long id = mainDatabase.insert(DBContract.ContactTable.TABLE_NAME, null, toAdd);
+			if(id==-1)
+			{
+				Log.e("error", "Error while inserting new Contact in database");
+			}
+			
+			/* Mise a jour du contact */
+			tmp.setId(id);
+			
+			return;
+		}
+		
 		String command = insertCommand(item);
 		if(command == null)
+		{
+			Log.e("error", "Trying to insert non database compliant object !");
 			return;
+		}
 		else
 			mainDatabase.execSQL(command);
 	}
@@ -170,6 +297,9 @@ public class Database
 		else
 			return null;
 	}
+	
+	//TODO Les REMOVE ! Et ca va pas etre comique ca !
+	
 		
 //	/**
 //	 * Cree un ArrayList de type <E> avec l'objet cursor specifie

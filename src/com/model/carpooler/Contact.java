@@ -6,7 +6,7 @@ package com.model.carpooler;
  */
 public class Contact
 {
-	private int id; // permet d'identifier l'entree de la database liee
+	private long id; // permet d'identifier l'entree de la database liee
 	private String name;
 	private String firstName;
 	private Information info;
@@ -95,13 +95,13 @@ public class Contact
 	}
 	
 	/** Getter pour this.id */
-	public int getId()
+	public long getId()
 	{
 		return id;
 	}
 	
 	/** Setter pour this.id */
-	public void setId(int value)
+	public void setId(long value)
 	{
 		id = value;
 	}

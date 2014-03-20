@@ -3,6 +3,8 @@ package com.model.carpooler;
 import java.util.ArrayList;
 import java.util.Date;
 
+import com.utils.carpooler.EmptyContactListException;
+
 /** Classe modelisant un trajet, c'est a dire un triplet ([Contact]-Road-Date).
  * Permet de dresser un historique des trajets.
  * @author loic
@@ -19,9 +21,13 @@ public class Journey
 	 * Constructeur de la Classe Journey, initialise un trajet sur la route road
 	 * a la date date, sans contact associe. 
 	 */
-	public Journey(ArrayList<Contact> contacts, Road road, Date date)
+	public Journey(ArrayList<Contact> contacts, Road road, Date date) throws EmptyContactListException
 	{
-		this.contacts = new ArrayList<Contact>();
+		if(contacts.isEmpty())
+		{
+			throw new EmptyContactListException("");
+		}
+		this.contacts = contacts;
 		this.road = road;
 		this.date = date;
 	}
