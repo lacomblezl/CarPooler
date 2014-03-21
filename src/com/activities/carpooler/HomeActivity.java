@@ -26,8 +26,12 @@ public class HomeActivity extends Activity
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_home);
 
-		/* Instanciation de la database */
+		/* Instanciation de la database et des listes de donnees */
 		CarPooler.openDB(getApplicationContext());
+		CarPooler.contactList = CarPooler.appDatabase.loadContacts();
+		CarPooler.roadList = CarPooler.appDatabase.loadRoads();
+		CarPooler.history = CarPooler.appDatabase.loadHistory(
+				CarPooler.contactList, CarPooler.roadList);
 		
 		/* Remplissage du menu */
 		fillMenu();
@@ -76,7 +80,8 @@ public class HomeActivity extends Activity
 			Intent intent;
 			switch (position)
 			{
-				case 0: intent = new Intent(view.getContext(), NewJourneyActivity.class);
+				//TODO restor case 0 correct behaviour
+				case 0: intent = new Intent(view.getContext(), TestActivity.class);
 						break;
 				case 1: intent = new Intent(view.getContext(), ContactListActivity.class);
 						break;

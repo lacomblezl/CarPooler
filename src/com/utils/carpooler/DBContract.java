@@ -60,7 +60,7 @@ public abstract class DBContract
 	public static abstract class ContactTable implements BaseColumns
 	{
 		public static final String TABLE_NAME = "Contact";
-		public static final String[] CONTACT_ID = {"\"contact_id\"", " INTEGER PRIMARY KEY"};
+		public static final String[] CONTACT_ID = {ContactTable._ID, " INTEGER PRIMARY KEY"};
 		public static final String[] NAME = {"\"name\"", " TEXT NOT NULL"};
 		public static final String[] SURNAME = {"\"firstname\"", " TEXT NOT NULL"};
 		public static final String[] BILL = {"\"bill\"", " REAL NOT NULL"};

@@ -66,7 +66,7 @@ public class Database
 					/* Instancie le nouveau contact : id-nom-prenom */
 					Contact tmp = new Contact(cursor.getInt(0), cursor.getString(1), cursor.getString(2));
 					tmp.addToBill(cursor.getDouble(3));	
-					result.add((int) (tmp.getId()-1), tmp); //TODO verifier qu'il n'y a pas d'id 0 et que tout se passe bien !
+					result.add((int) (tmp.getId() - 1), tmp); //TODO mod -1 //TODO verifier qu'il n'y a pas d'id 0 et que tout se passe bien !
 					cursor.moveToNext();
 				}
 		}
@@ -136,7 +136,10 @@ public class Database
 				{
 					while(!contacts.isAfterLast())
 					{
-						subList.add(contactList.get((int) (contacts.getLong(0)-1)));
+						//TODO mod -1
+						Log.d("debug", "contact id found in database : " + contacts.getLong(0));
+						subList.add(contactList.get((int) (contacts.getLong(0) - 1)));
+						contacts.moveToNext();
 					}
 				}
 				contacts.close();
@@ -169,6 +172,7 @@ public class Database
 					return result;
 				}
 				result.add(newJourney);
+				cursor.moveToNext();
 			}
 		}
 		cursor.close();
@@ -226,6 +230,9 @@ public class Database
 			{
 				toAdd.put(DBContract.JourneyContactTable.JOURNEY_ID[0], id);
 				toAdd.put(DBContract.JourneyContactTable.CONTACT_ID[0], contact.getId());
+				//TODO Debug print
+				Log.i("info", "Inserted Journey id : " + id);
+				Log.i("info", "Inserted Contact id : " + contact.getId());
 				retval = mainDatabase.insert(DBContract.JourneyContactTable.TABLE_NAME, null, toAdd);
 				if(retval==-1)
 				{

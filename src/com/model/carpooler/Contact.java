@@ -33,6 +33,7 @@ public class Contact
 	 */
 	public Contact(int id, String name, String firstName)
 	{
+		this.id = id;
 		this.name = name;
 		this.firstName = firstName;
 		info = new Information();

@@ -54,9 +54,7 @@ public class RoadListActivity extends Activity
 	 * Rempli la liste des itineraires connus
 	 */
 	private void fillList(ListView list)
-	{
-		CarPooler.roadList = CarPooler.appDatabase.loadRoads();
-		
+	{	
 		list.setAdapter(new ArrayAdapter<Road>(this, android.R.layout.simple_list_item_1,
 				CarPooler.roadList));
 	}
