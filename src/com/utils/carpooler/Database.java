@@ -1,10 +1,12 @@
 package com.utils.carpooler;
 
+import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.Iterator;
+import java.util.Locale;
 
 import android.content.ContentValues;
 import android.content.Context;
@@ -23,6 +25,10 @@ import com.model.carpooler.Road;
  */
 public class Database
 {
+	// Constance definissant la conversion dates <-> String
+	static final Locale dateStyle = Locale.FRANCE;
+	static final DateFormat df = DateFormat.getDateInstance(DateFormat.FULL, dateStyle);
+	
 	private SQLiteDatabase mainDatabase;	// base de donnee utilisee
 	
 	/**
@@ -150,7 +156,7 @@ public class Database
 				Date newDate;
 				try
 				{
-					newDate = new SimpleDateFormat("EEE MMM dd HH:mm:ss zzz yyyy").parse(cursor.getString(1));
+					newDate = df.parse(cursor.getString(1));
 				}
 				catch (ParseException e)
 				{
@@ -176,6 +182,8 @@ public class Database
 			}
 		}
 		cursor.close();
+		//TODO debug print
+		Log.d("info","History loaded successfully - " + result.size() + " entries loaded");
 		return result;
 	}
 	
@@ -214,7 +222,7 @@ public class Database
 			
 			/* Insertion dans la table Journey */
 			ContentValues toAdd = new ContentValues();
-			toAdd.put(DBContract.JourneyTable.DATE[0], tmp.getDate().toString());
+			toAdd.put(DBContract.JourneyTable.DATE[0], df.format(tmp.getDate()));
 			toAdd.put(DBContract.JourneyTable.ROADNAME[0], tmp.getRoad().getName());
 
 			long id = mainDatabase.insert(DBContract.JourneyTable.TABLE_NAME, null, toAdd);
