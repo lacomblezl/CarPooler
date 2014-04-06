@@ -6,16 +6,16 @@
 	android:layout_width="fill_parent" 
 	xmlns:android="http://schemas.android.com/apk/res/android" >
 
-	<ImageView
+	<ImageView android:id="@+id/image_row"
 	    android:contentDescription="@string/image"
 	    android:layout_height="fill_parent"
 	    android:layout_width="wrap_content"
 	    android:layout_marginRight="@dimen/config_row_ListScreen_title_left_and_right_margin" 
- 		android:layout_gravity="center_vertical"
-		android:id="@+id/image_row" />
+ 		android:layout_gravity="center_vertical" />
 
 	
-	<TextView android:layout_height="wrap_content"
+	<TextView android:id="@+id/text_row" 
+	    android:layout_height="wrap_content"
 	    android:layout_width="wrap_content"
 	    android:layout_gravity="center_vertical"
 		android:marqueeRepeatLimit="marquee_forever"
@@ -25,7 +25,6 @@
 		android:gravity="center_vertical"
 		android:textColor="@layout/text_color" 
 		android:singleLine="true"
-		android:typeface="normal"
-		android:id="@+id/text_row"/>
+		android:typeface="normal" />
 	
 </LinearLayout>

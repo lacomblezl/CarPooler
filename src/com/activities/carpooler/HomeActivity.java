@@ -77,21 +77,22 @@ public class HomeActivity extends Activity
 			/* Determine l'option qui a ete selectionnee dans la liste et lance l'activite
 			 * adaptee.
 			 */
-			Intent intent;
+			Class<?> activity;
 			switch (position)
 			{
-				//TODO restor case 0 correct behaviour
-				case 0: intent = new Intent(view.getContext(), TestActivity.class);
+				//TODO restore case 0 correct behaviour
+				case 0: activity = TestActivity.class;
 						break;
-				case 1: intent = new Intent(view.getContext(), ContactListActivity.class);
+				case 1: activity = ContactListActivity.class;
 						break;
-				case 2: intent = new Intent(view.getContext(), RoadListActivity.class);
+				case 2: activity = RoadListActivity.class;
 						break;
-				case 3: intent = new Intent(view.getContext(), HistoryActivity.class);
+				case 3: activity = HistoryActivity.class;
 						break;
-				default: intent = new Intent();
+				default: activity = NewJourneyActivity.class;
 						break;
 			}
+			Intent intent = new Intent(view.getContext(), activity);
 			startActivity(intent);
 		}
 	};

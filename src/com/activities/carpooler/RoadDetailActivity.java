@@ -4,16 +4,19 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import com.driver.carpooler.CarPooler;
 import com.model.carpooler.Road;
 
 public class RoadDetailActivity extends Activity
 {
-
+	private boolean isOnEdit;
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState)
 	{
@@ -34,7 +37,7 @@ public class RoadDetailActivity extends Activity
 			//TODO listener sur le bouton : creer un nouveau trajet
 			
 			/* champ rendus editables */
-			activateFields();
+			setFields(true);
 		}
 		else
 		{
@@ -49,6 +52,31 @@ public class RoadDetailActivity extends Activity
 		// Inflate the menu; this adds items to the action bar if it is present.
 		getMenuInflater().inflate(R.menu.road_detail, menu);
 		return true;
+	}
+	
+	@Override
+    public boolean onOptionsItemSelected(MenuItem item)
+	{
+		switch(item.getItemId()) {
+		case R.id.menu_edit:
+			setFields(true);
+			Toast toast = Toast.makeText(this, "menu_edit pressed (" + isOnEdit +")", Toast.LENGTH_SHORT);
+			toast.show();
+			break;
+		}
+		
+		return false;
+	}
+	
+	@Override
+	protected void onPause()
+	{
+		super.onPause();
+		if(isOnEdit)
+		{
+			//TODO mettre a jour le journey accrodingly !
+			setFields(false);
+		}
 	}
 	
 	/**
@@ -87,15 +115,22 @@ public class RoadDetailActivity extends Activity
 	/**
 	 * Passe la propriete 'focusable' des champs a 'true'
 	 */
-	private void activateFields()
+	private void setFields(boolean bool)
 	{
-		View fields[] = {findViewById(R.id.name_field),
-					findViewById(R.id.length_field),
-					findViewById(R.id.duration_field),
-					findViewById(R.id.price_field)};
-	
-		for(View view:fields)
-			view.setFocusable(true);
+		isOnEdit = bool;
+		
+		EditText fields[] = {(EditText) findViewById(R.id.name_field),
+				(EditText) findViewById(R.id.length_field),
+				(EditText) findViewById(R.id.duration_field),
+				(EditText) findViewById(R.id.price_field)};
+		
+		for(EditText view:fields)
+		{
+			if(isOnEdit)
+				view.setFocusableInTouchMode(isOnEdit);
+			else
+				view.setFocusable(isOnEdit);
+		}
 	}
 
 }

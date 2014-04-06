@@ -4,8 +4,6 @@
     android:orientation="vertical"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
-    android:paddingLeft="@dimen/activity_horizontal_margin"
-    android:paddingRight="@dimen/activity_horizontal_margin"
     tools:context=".MainMenu" >
 
     <!-- header -->
@@ -41,7 +39,7 @@
 	    android:layout_height="@dimen/config_divider_size" 
 		android:layout_width="fill_parent"/>
     
-	
+	<!-- Le menu en lui-meme -->
     <ListView android:id="@+id/home_list"
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"/>

@@ -21,5 +21,12 @@
     <string name="price">Prix</string>
     <string name="create_road">Nouvel Itinéraire</string>
     <string name="unknown"><i>Inconnu</i></string>
+    <string name="select_road">Choisir un intinéraire</string>
+    <string name="road"><b>Itinéraire</b></string>
+    <string name="date">Date</string>
+    <string name="set_date">Modifier la date</string>
+    <string name="title_activity_detail">DetailActivity</string>
+    <string name="edit">Modifier</string>
+    <string name="title_activity_contact_details">ContactDetailsActivity</string>
 
 </resources>
