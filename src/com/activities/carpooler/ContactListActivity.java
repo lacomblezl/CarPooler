@@ -8,18 +8,20 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
+import android.widget.Toast;
 
 import com.driver.carpooler.CarPooler;
 import com.model.carpooler.Contact;
 
 public class ContactListActivity extends Activity
 {
-	// Liste de strings "nom prenom" des Contacts
+	public static String CONTACT_EXTRA = "contact_id";
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState)
@@ -39,6 +41,18 @@ public class ContactListActivity extends Activity
 		// Inflate the menu; this adds items to the action bar if it is present.
 		getMenuInflater().inflate(R.menu.contact_list, menu);
 		return true;
+	}
+	
+	@Override
+    public boolean onOptionsItemSelected(MenuItem item)
+	{
+		switch(item.getItemId()) {
+		case R.id.contact_add:
+			Intent i = new Intent(this, ContactDetailsActivity.class);
+			i.putExtra(CONTACT_EXTRA, -1);
+			startActivity(i);
+		}
+		return false;
 	}
 	
 	/**
@@ -86,7 +100,7 @@ public class ContactListActivity extends Activity
 		{
 			Intent i = new Intent(view.getContext(), ContactDetailsActivity.class);
 
-			i.putExtra("contact_id", position);
+			i.putExtra(CONTACT_EXTRA, position);
 			startActivity(i);
 		}
 	};

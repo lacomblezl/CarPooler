@@ -8,20 +8,25 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.Toast;
 
 import com.driver.carpooler.CarPooler;
 import com.model.carpooler.Road;
 
-public class RoadDetailActivity extends Activity
-{
-	private boolean isOnEdit;
-	
+public class RoadDetailActivity extends DetailsActivity
+{	
 	@Override
 	protected void onCreate(Bundle savedInstanceState)
 	{
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_road_detail);
+		
+		EditText[] rows = {(EditText) findViewById(R.id.name_field),
+				(EditText) findViewById(R.id.length_field),
+				(EditText) findViewById(R.id.duration_field),
+				(EditText) findViewById(R.id.price_field)};
+		
+		/* Specifie les champs a verrouiller ou non */
+		setEditRows(rows);
 		
 		/* Recupere l'id passe par RoadListActivity lors de l'appel
 		 * Si l'id recupere est -1; alors on cree un nouvel itineraire 
@@ -29,6 +34,7 @@ public class RoadDetailActivity extends Activity
 		Intent intent = getIntent();
 		int id = intent.getExtras().getInt(RoadListActivity.ROAD_ID);
 		
+		/* Si l'id vaut -1, alors il s'agit d'un nouveau trajet destine a etre cree */
 		if(id==-1)
 		{
 			/* bouton rendu visible */
@@ -46,6 +52,7 @@ public class RoadDetailActivity extends Activity
 		}
 	}
 
+	/*
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu)
 	{
@@ -67,16 +74,14 @@ public class RoadDetailActivity extends Activity
 		
 		return false;
 	}
+	*/
 	
 	@Override
 	protected void onPause()
 	{
 		super.onPause();
-		if(isOnEdit)
-		{
-			//TODO mettre a jour le journey accrodingly !
-			setFields(false);
-		}
+		
+		//TODO mettre a jour le journey accrodingly (arrayList + database) !
 	}
 	
 	/**
@@ -111,10 +116,10 @@ public class RoadDetailActivity extends Activity
 		else
 		currentField.setText(Double.toString(tmp));
 	}
+	/*
 	
-	/**
 	 * Passe la propriete 'focusable' des champs a 'true'
-	 */
+	 
 	private void setFields(boolean bool)
 	{
 		isOnEdit = bool;
@@ -132,5 +137,6 @@ public class RoadDetailActivity extends Activity
 				view.setFocusable(isOnEdit);
 		}
 	}
+	*/
 
 }

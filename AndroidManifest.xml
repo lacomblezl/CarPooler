@@ -54,6 +54,10 @@
             android:name="com.activities.carpooler.ContactDetailsActivity"
             android:label="@string/title_activity_contact_details" >
         </activity>
+        <activity
+            android:name="com.activities.carpooler.ContactViewActivity"
+            android:label="@string/title_activity_contact" >
+        </activity>
     </application>
 
 </manifest>

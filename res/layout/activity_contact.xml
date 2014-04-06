@@ -42,61 +42,82 @@
 		android:layout_width="fill_parent"
 		android:id="@+id/menu_header_divider"/>
 	
-	<!-- The main content -->
-	<!-- Name Field -->
-	<LinearLayout
-	    android:layout_width="fill_parent"
-	    android:layout_height="@dimen/config_list_row_size"
+	<!-- Header Field -->
+	<TextView android:id="@+id/name_header"
+	    android:layout_width="wrap_content"
+	    android:layout_height="wrap_content"
 	    android:paddingLeft="@dimen/config_row_ListItem_left_margin"
 	    android:paddingRight="@dimen/config_row_ListItem_left_margin"
-	    android:orientation="horizontal" >
-	    
-	    <TextView 
-	        android:layout_width="0dp"
-	        android:layout_height="wrap_content"
-	        android:layout_weight="1"
-	        android:layout_gravity="center_vertical"
-	        android:textSize="@dimen/config_text_ListItem_size" 
-	        android:text="@string/name"	/>
-	    
-	    <EditText android:id="@+id/name_field"
-	        android:layout_height="wrap_content"
-	        android:layout_width="0dp"
-	        android:layout_weight="1"
-	        android:layout_gravity="center_vertical"
-	        android:inputType="textCapSentences"
-	        android:focusable="false"/>
-	</LinearLayout>
+	    android:paddingTop="10dp"
+	    android:paddingBottom="10dp"
+	    android:layout_gravity="center_vertical"
+	    android:textSize="@dimen/config_text_ListItem_size" 
+	    android:text="@string/first_name" />
 	
 	<!-- The divider -->
 	<ImageView android:background="@color/divider"
 	    android:layout_height="@dimen/config_divider_size" 
 		android:layout_width="fill_parent"
 		android:id="@+id/menu_header_divider"/>
-
-	<!-- FirstName Field -->
+	
+	<!-- Info sur le solde -->
 	<LinearLayout
+	    android:orientation="horizontal"
 	    android:layout_width="fill_parent"
-	    android:layout_height="@dimen/config_list_row_size"
+	    android:layout_height="wrap_content"
 	    android:paddingLeft="@dimen/config_row_ListItem_left_margin"
 	    android:paddingRight="@dimen/config_row_ListItem_left_margin"
-	    android:orientation="horizontal" >
+	    android:paddingTop="10dp"
+	    android:paddingBottom="10dp" >
 	    
 	    <TextView 
-	        android:layout_width="0dp"
 	        android:layout_height="wrap_content"
-	        android:layout_weight="1"
+	        android:layout_width="0dp"
+	        android:layout_weight="2"
 	        android:layout_gravity="center_vertical"
-	        android:textSize="@dimen/config_text_ListItem_size" 
-	        android:text="@string/first_name" />
+	        android:textSize="@dimen/config_text_ListItem_size"
+	        android:text="@string/bill" />
 	    
-	    <EditText android:id="@+id/first_name_field"
+	    <TextView android:id="@+id/bill_field"
 	        android:layout_height="wrap_content"
 	        android:layout_width="0dp"
 	        android:layout_weight="1"
 	        android:layout_gravity="center_vertical"
-	        android:inputType="textCapSentences"
-			android:focusable="false"/>
+	        android:textSize="@dimen/config_text_ListItem_size"
+	        android:text="25 €" />
+	    
 	</LinearLayout>
 	
+	<!-- Boutons -->
+	<LinearLayout
+	    android:orientation="horizontal"
+	    android:layout_height="wrap_content"
+	    android:layout_width="fill_parent"
+	    android:paddingLeft="@dimen/config_row_ListItem_left_margin"
+	    android:paddingRight="@dimen/config_row_ListItem_left_margin"
+	    android:paddingTop="10dp"
+	    android:paddingBottom="10dp" >
+	    
+	    <Button android:id="@+id/history_button"
+	        android:layout_height="wrap_content"
+	        android:layout_width="0dp"
+	        android:layout_weight="1"
+	        android:paddingLeft="10dp"
+	        android:paddingRight="10dp"
+	        android:textSize="@dimen/config_text_ListItem_size"
+	        android:text="@string/history" />
+	    
+	    <Button android:id="@+id/pay_button"
+	        android:layout_height="wrap_content"
+	        android:layout_width="0dp"
+	        android:layout_weight="1"
+	        android:paddingLeft="10dp"
+	        android:paddingRight="10dp"
+	        android:textSize="@dimen/config_text_ListItem_size"
+	        android:text="@string/pay" />
+	    
+	</LinearLayout>
+	    
+	
+
 </LinearLayout>

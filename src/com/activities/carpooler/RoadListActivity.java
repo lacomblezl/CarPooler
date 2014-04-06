@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
@@ -48,6 +49,18 @@ public class RoadListActivity extends Activity
 		super.onResume();
 		ListView list = (ListView) findViewById(R.id.main_list);
 		fillList(list);
+	}
+	
+	@Override
+    public boolean onOptionsItemSelected(MenuItem item)
+	{
+		switch(item.getItemId()) {
+		case R.id.road_add:
+			Intent i = new Intent(this, RoadDetailActivity.class);
+			i.putExtra(ROAD_ID, -1);
+			startActivity(i);
+		}
+		return false;
 	}
 	
 	/**

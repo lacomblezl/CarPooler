@@ -28,5 +28,12 @@
     <string name="title_activity_detail">DetailActivity</string>
     <string name="edit">Modifier</string>
     <string name="title_activity_contact_details">ContactDetailsActivity</string>
+    <string name="name">Nom</string>
+    <string name="first_name">Prénom</string>
+    <string name="new_contact">Nouveau Contact</string>
+    <string name="new_road">Nouvel Itinéraire</string>
+    <string name="title_activity_contact">ContactActivity</string>
+    <string name="bill">Solde</string>
+    <string name="pay">Paier</string>
 
 </resources>
