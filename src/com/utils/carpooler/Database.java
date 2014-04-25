@@ -2,7 +2,6 @@ package com.utils.carpooler;
 
 import java.text.DateFormat;
 import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.Iterator;
@@ -313,8 +312,82 @@ public class Database
 			return null;
 	}
 	
-	//TODO Les REMOVE ! Et ca va pas etre comique ca !
+	/**
+	 * Met a jour l'entree correspondant a 'object' dans la database.
+	 * @pre _
+	 * @post la database est mise a jour si necessaire.
+	 * @return 'true' si la database a ete modifiee, false sinon.
+	 */
+	public boolean update(Object object)
+	{
+		if(object instanceof Road)
+		{
+			Road tmp = (Road) object;
+			
+			String cmd = "UPDATE " + DBContract.RoadTable.TABLE_NAME + " SET " +
+					DBContract.RoadTable.LENGTH + "=" + tmp.getLength() + ", " +
+					DBContract.RoadTable.DURATION + "=" + tmp.getDuration() + ", " +
+					DBContract.RoadTable.PRICE + "=" + tmp.getPrice() + " WHERE " +
+					DBContract.RoadTable.ROADNAME + "=" + tmp.getName();
+			mainDatabase.execSQL(cmd);
+			
+			return true;
+		}
+		
+		if(object instanceof Contact)
+		{
+			Contact tmp = (Contact) object;
+			
+			String cmd = "UPDATE " + DBContract.ContactTable.TABLE_NAME + " SET " +
+					DBContract.ContactTable.NAME + "=" + tmp.getName() + ", " +
+					DBContract.ContactTable.SURNAME + "=" + tmp.getFirstName() + ", " +
+					DBContract.ContactTable.BILL + "=" + tmp.getbill() + " WHERE " +
+					DBContract.ContactTable.CONTACT_ID + "=" + tmp.getId();
+			mainDatabase.execSQL(cmd);
+			
+			return true;
+		}
+		else
+		{
+			Log.e("Database", "Trying to update database with a non-recognized item");
+			return false;
+		}
+	}
 	
+	//TODO Les REMOVE ! Et ca va pas etre comique ca !
+	/**
+	 * Retire de la database l'objet 'object'.
+	 * @pre _
+	 * @post retire de la database l'objet 'object' s'il s'y trouvait
+	 * @return 'true' si 'object' a ete supprime de la database, 'false' en cas d'erreur
+	 */
+	public boolean delete(Object object)
+	{
+		if(object instanceof Road)
+		{
+			Road tmp = (Road) object;
+			
+			String cmd = "DELETE FROM " + DBContract.RoadTable.TABLE_NAME + " WHERE " +
+					DBContract.RoadTable.ROADNAME + "=" + tmp.getName();
+			mainDatabase.execSQL(cmd);
+			return true;
+		}
+		
+		if(object instanceof Contact)
+		{
+			Contact tmp = (Contact) object;
+			
+			String cmd = "DELETE FROM " + DBContract.ContactTable.TABLE_NAME + " WHERE " +
+					DBContract.ContactTable.CONTACT_ID + "=" + tmp.getId();
+			mainDatabase.execSQL(cmd);
+			return true;
+		}
+		else
+		{
+			Log.e("Database", "Trying to remove a non-recognized item");
+		}
+	}
+}	
 		
 //	/**
 //	 * Cree un ArrayList de type <E> avec l'objet cursor specifie

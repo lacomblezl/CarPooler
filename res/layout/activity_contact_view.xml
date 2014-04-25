@@ -51,8 +51,7 @@
 	    android:paddingTop="10dp"
 	    android:paddingBottom="10dp"
 	    android:layout_gravity="center_vertical"
-	    android:textSize="@dimen/config_text_ListItem_size" 
-	    android:text="@string/first_name" />
+	    android:textSize="@dimen/config_text_ListItem_size" />
 	
 	<!-- The divider -->
 	<ImageView android:background="@color/divider"

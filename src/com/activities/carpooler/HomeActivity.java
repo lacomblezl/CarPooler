@@ -81,7 +81,7 @@ public class HomeActivity extends Activity
 			switch (position)
 			{
 				//TODO restore case 0 correct behaviour
-				case 0: activity = ContactViewActivity.class;
+				case 0: activity = TestActivity.class;
 						break;
 				case 1: activity = ContactListActivity.class;
 						break;

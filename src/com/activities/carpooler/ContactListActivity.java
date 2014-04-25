@@ -98,7 +98,7 @@ public class ContactListActivity extends Activity
 		@Override
 		public void onItemClick(AdapterView<?> parent, View view, int position, long id)
 		{
-			Intent i = new Intent(view.getContext(), ContactDetailsActivity.class);
+			Intent i = new Intent(view.getContext(), ContactViewActivity.class);
 
 			i.putExtra(CONTACT_EXTRA, position);
 			startActivity(i);
